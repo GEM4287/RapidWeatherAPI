@@ -3,6 +3,11 @@ spring:
     active: local
   application:
     name: RapidWeatherApi
+  security:
+    user:
+      name: gaurav
+      password: 12345
+      roles: ADMIN
 
 rapidApi:
   forecastURL: 'https://forecast9.p.rapidapi.com/rapidapi/forecast/'

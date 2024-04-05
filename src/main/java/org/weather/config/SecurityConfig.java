@@ -1,5 +1,6 @@
 package org.weather.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -19,6 +20,15 @@ import static org.springframework.security.config.Customizer.withDefaults;
 @EnableWebSecurity
 public class SecurityConfig
 {
+    @Value("${spring.security.user.name}")
+    private String username;
+
+    @Value("${spring.security.user.password}")
+    private String password;
+
+    @Value("${spring.security.user.roles}")
+    private String roles;
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception{
         httpSecurity
@@ -31,7 +41,7 @@ public class SecurityConfig
     @Bean
     public UserDetailsService inMemoryUserDetailsManager(){
         return new InMemoryUserDetailsManager(
-            User.withUsername("gaurav").password(passwordEncoder().encode("12345")).authorities("USER","ADMIN").build()
+            User.withUsername(username).password(passwordEncoder().encode(password)).authorities(roles).build()
         );
     }
 

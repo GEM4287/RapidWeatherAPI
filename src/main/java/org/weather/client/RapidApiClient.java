@@ -1,6 +1,5 @@
 package org.weather.client;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -8,11 +7,13 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.util.Objects;
+import java.util.logging.Logger;
 
 @Component
 @Slf4j
 public class RapidApiClient
 {
+    private static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
     private final OkHttpClient httpClient = new OkHttpClient();
 
     @Value("${rapidApi.apiKey}")
@@ -49,7 +50,7 @@ public class RapidApiClient
         try{
             return Objects.requireNonNull(httpClient.newCall(request).execute().body()).string();
         } catch (Exception exception) {
-            System.out.println("Error: " + exception.getMessage());
+            logger.warning("Error: " + exception.getMessage());
         }
         return null;
     }
