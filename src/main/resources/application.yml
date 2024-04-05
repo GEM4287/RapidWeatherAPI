@@ -1,0 +1,10 @@
+spring:
+  profiles:
+    active: local
+  application:
+    name: RapidWeatherApi
+
+rapidApi:
+  forecastURL: 'https://forecast9.p.rapidapi.com/rapidapi/forecast/'
+  apiKey: 'd161a844ecmshb1d91051c78a37ap10fd80jsn8590b5693cea'
+  host: 'forecast9.p.rapidapi.com'
